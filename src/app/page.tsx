@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { getCurrentPractice } from '@/lib/practice-config'
-import { Calendar, MapPin, Phone, Mail, Clock, CheckCircle, Star, Heart } from 'lucide-react'
+import { getCurrentPractice } from '@/lib/practice-config';
+import { Calendar, Phone, MapPin, Clock, Star, CheckCircle } from 'lucide-react';
 
 export default function HealthcarePage() {
   const practice = getCurrentPractice();
@@ -11,16 +11,15 @@ export default function HealthcarePage() {
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-white/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div>
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
               <h1 className="text-2xl font-bold text-gray-900">{practice.name}</h1>
-              <p className="text-emerald-600 font-medium">{practice.doctor}</p>
             </div>
-            <nav className="hidden md:flex space-x-8">
-              <a href="#home" className="text-gray-700 hover:text-emerald-600 transition-colors">Home</a>
-              <a href="#services" className="text-gray-700 hover:text-emerald-600 transition-colors">Diensten</a>
-              <a href="#about" className="text-gray-700 hover:text-emerald-600 transition-colors">Over Ons</a>
-              <a href="#contact" className="text-gray-700 hover:text-emerald-600 transition-colors">Contact</a>
+            <nav className="hidden md:flex items-center space-x-8">
+              <a href="#home" className="text-gray-700 hover:text-gray-900 font-medium">Home</a>
+              <a href="#about" className="text-gray-700 hover:text-gray-900 font-medium">About</a>
+              <a href="#services" className="text-gray-700 hover:text-gray-900 font-medium">Services</a>
+              <a href="#contact" className="text-gray-700 hover:text-gray-900 font-medium">Contact</a>
             </nav>
           </div>
         </div>
@@ -33,7 +32,7 @@ export default function HealthcarePage() {
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
               {practice.template.heroTitle}
             </h1>
-            <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               {practice.template.heroSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -41,117 +40,142 @@ export default function HealthcarePage() {
                 <Calendar className="w-5 h-5 mr-2" />
                 {practice.template.ctaText}
               </button>
-              <button className="bg-white text-emerald-600 font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl border border-emerald-200 transition-all duration-300">
+              <button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
                 <Phone className="w-5 h-5 mr-2" />
-                Bel Ons Nu
+                Call Now
               </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                {practice.template.aboutTitle}
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                {practice.template.aboutText}
+              </p>
+              
+              {/* Doctor Info */}
+              <div className={practice.template.cardStyling}>
+                <div className="flex items-center mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-emerald-600 to-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                    {practice.doctor.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900">{practice.doctor}</h3>
+                    <p className="text-gray-600">{practice.branding.focus}</p>
+                  </div>
+                </div>
+                <div className="flex items-center text-gray-600">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  <span>{practice.location}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className={practice.template.cardStyling}>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Waarom Kiezen voor Ons?</h3>
+              <ul className="space-y-3">
+                <li className="flex items-center">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Holistische {practice.type} zorg</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Moderne behandeltechnieken</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Gepersonaliseerde behandelplannen</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Preventieve gezondheidsaanpak</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white/50">
+      <section id="services" className="py-16 bg-white/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Onze Wellness Diensten</h2>
-            <p className="text-xl text-gray-600">Alles wat u nodig heeft voor optimale gezondheid en welzijn</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              {practice.template.servicesTitle}
+            </h2>
+            <p className="text-xl text-gray-600">{practice.branding.tagline}</p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {practice.template.services.map((service, index) => (
+            {practice.services.map((service, index) => (
               <div key={index} className={practice.template.cardStyling}>
-                <div className="flex items-center mb-4">
-                  <CheckCircle className="w-6 h-6 text-emerald-600 mr-3" />
-                  <h3 className="text-lg font-semibold text-gray-900">{service}</h3>
+                <div className="text-center">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.name}</h3>
+                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  {service.duration && (
+                    <div className="flex items-center justify-center text-sm text-gray-500">
+                      <Clock className="w-4 h-4 mr-1" />
+                      {service.duration}
+                    </div>
+                  )}
                 </div>
-                <p className="text-gray-600">
-                  Professionele {service.toLowerCase()} service met persoonlijke begeleiding en bewezen resultaten.
-                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Over {practice.doctor}</h2>
-              <p className="text-lg text-gray-700 mb-6">
-                Met meer dan 15 jaar ervaring in holistische geneeskunde, helpt {practice.doctor} 
-                patiënten bij het bereiken van optimale gezondheid door natuurlijke en bewezen methodes.
-              </p>
-              <p className="text-gray-600 mb-8">
-                Ons team bij {practice.name} combineert traditionele medische kennis met moderne 
-                wellness technieken om u de beste zorg te bieden.
-              </p>
-              <div className="flex items-center space-x-4">
-                <Heart className="w-6 h-6 text-emerald-600" />
-                <span className="text-gray-700">Persoonlijke zorg voor elk individu</span>
-              </div>
-            </div>
-            <div className={practice.template.cardStyling}>
-              <div className="flex items-center mb-4">
-                <Star className="w-5 h-5 text-yellow-400 mr-1" />
-                <Star className="w-5 h-5 text-yellow-400 mr-1" />
-                <Star className="w-5 h-5 text-yellow-400 mr-1" />
-                <Star className="w-5 h-5 text-yellow-400 mr-1" />
-                <Star className="w-5 h-5 text-yellow-400" />
-              </div>
-              <blockquote className="text-lg text-gray-700 italic mb-4">
-                "{practice.template.testimonial.text}"
-              </blockquote>
-              <cite className="text-emerald-600 font-medium">
-                — {practice.template.testimonial.author}
-              </cite>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white/50">
+      <section id="contact" className="py-16 bg-white/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Contact & Afspraken</h2>
-            <p className="text-xl text-gray-600">Neem contact op voor een persoonlijk gesprek</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              {practice.template.contactTitle}
+            </h2>
+            <p className="text-xl text-gray-600">
+              Klaar voor {practice.branding.focus}?
+            </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-12">
             <div className={practice.template.cardStyling}>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Contactgegevens</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">Contactgegevens</h3>
               <div className="space-y-4">
                 <div className="flex items-center">
-                  <MapPin className="w-5 h-5 text-emerald-600 mr-3" />
-                  <span className="text-gray-700">{practice.location}</span>
+                  <MapPin className="w-5 h-5 text-gray-400 mr-3" />
+                  <span>{practice.location}</span>
                 </div>
                 <div className="flex items-center">
-                  <Phone className="w-5 h-5 text-emerald-600 mr-3" />
-                  <span className="text-gray-700">+31 20 123 4567</span>
+                  <Phone className="w-5 h-5 text-gray-400 mr-3" />
+                  <span>+31 20 123 4567</span>
                 </div>
                 <div className="flex items-center">
-                  <Mail className="w-5 h-5 text-emerald-600 mr-3" />
-                  <span className="text-gray-700">info@amsterdamwellness.nl</span>
-                </div>
-                <div className="flex items-center">
-                  <Clock className="w-5 h-5 text-emerald-600 mr-3" />
-                  <span className="text-gray-700">Ma-Vr: 8:00-18:00</span>
+                  <Clock className="w-5 h-5 text-gray-400 mr-3" />
+                  <span>Maandag - Vrijdag: 9:00 - 18:00</span>
                 </div>
               </div>
             </div>
             
             <div className={practice.template.cardStyling}>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Maak een Afspraak</h3>
-              <p className="text-gray-600 mb-6">
-                Klaar om uw wellness journey te beginnen? Boek een consultatiegesprek met {practice.doctor}.
-              </p>
-              <button className={practice.template.buttonStyling + " w-full"}>
-                <Calendar className="w-5 h-5 mr-2" />
-                Online Afspraak Boeken
-              </button>
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">Snelle Acties</h3>
+              <div className="space-y-4">
+                <button className={practice.template.buttonStyling + " w-full"}>
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Online Inplannen
+                </button>
+                <button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold px-6 py-3 rounded-lg transition-all duration-300">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Bel Kliniek
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -162,8 +186,14 @@ export default function HealthcarePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h3 className="text-2xl font-bold mb-4">{practice.name}</h3>
-            <p className="text-gray-400 mb-4">Uw partner in optimale gezondheid en welzijn</p>
-            <p className="text-gray-500">© 2024 {practice.name}. Alle rechten voorbehouden.</p>
+            <p className="text-gray-400 mb-4">{practice.branding.tagline}</p>
+            <div className="flex justify-center items-center space-x-4 text-sm text-gray-400">
+              <span>© 2025 {practice.name}</span>
+              <span>•</span>
+              <span>{practice.doctor}</span>
+              <span>•</span>
+              <span>{practice.location}</span>
+            </div>
           </div>
         </div>
       </footer>
